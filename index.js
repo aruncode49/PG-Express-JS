@@ -8,7 +8,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/about", (req, res) => {
-  res.send("This is about page!");
+  res.send(
+    `This is about page! I am ${req.query.name}, and my age is ${req.query.age}`
+  );
 });
 
 app.get("/contact", (req, res) => {
