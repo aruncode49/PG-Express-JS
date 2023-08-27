@@ -46,7 +46,17 @@ app.patch("/api/users/:id", (req, res) => {
 
 // Delete Request to delete the user with id
 app.delete("/api/users/:id", (req, res) => {
-  res.json({ status: "pending" });
+  const id = Number(req.params.id);
+  const updatedUsers = users.filter((user) => {
+    return user.id !== id;
+  });
+  fs.writeFile(
+    "./MOCK_DATA.json",
+    JSON.stringify(updatedUsers),
+    (err, data) => {
+      res.json({ status: `User Deleted with Id : ${id}` });
+    }
+  );
 });
 
 // Note: We can merge these request with same route
