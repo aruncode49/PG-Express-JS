@@ -9,15 +9,13 @@ const PORT = 8000;
 app.use(express.urlencoded({ extended: true })); // bodyParser -> change to express
 
 // Create Custom Middleware
-app.use((req, res, next) => {
-  req.myUserName = "aruncode49";
-  console.log("This is the custom middleware : 1");
-  next();
-});
-
-app.use((req, res, next) => {
-  console.log("My username is : ", req.myUserName);
-  next();
+app.use(function (req, res, next) {
+  const log = `\n${Date.now()} : ${req.method} : ${
+    req.path
+  } : New Request Recived`;
+  fs.appendFile("log.txt", log, (err) => {
+    next();
+  });
 });
 
 // ROUTES
