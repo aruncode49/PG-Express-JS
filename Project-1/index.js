@@ -8,6 +8,18 @@ const PORT = 8000;
 // Middleware -> Plugin
 app.use(express.urlencoded({ extended: true })); // bodyParser -> change to express
 
+// Create Custom Middleware
+app.use((req, res, next) => {
+  req.myUserName = "aruncode49";
+  console.log("This is the custom middleware : 1");
+  next();
+});
+
+app.use((req, res, next) => {
+  console.log("My username is : ", req.myUserName);
+  next();
+});
+
 // ROUTES
 app.get("/users", (req, res) => {
   const html = `
@@ -58,13 +70,6 @@ app.delete("/api/users/:id", (req, res) => {
     }
   );
 });
-
-// Note: We can merge these request with same route
-// app
-//   .route("/api/users/:id")
-//   .get((req, res) => {})
-//   .patch(() => {})
-//   .delete((req, res) => {});
 
 app.listen(PORT, () => {
   console.log(`Server is running at port : ${PORT}`);
