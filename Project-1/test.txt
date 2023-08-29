@@ -1,0 +1,4 @@
+In Mongoose
+We created a Schema - Define the structure
+    By using this Schema - We create a Model
+        And by using this Model - We do CRUD operation
